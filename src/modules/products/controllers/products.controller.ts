@@ -14,6 +14,7 @@ import { AddProductService } from '@/modules/products/services/add-product/add-p
 import { FindAllProductsService } from '@/modules/products/services/find-all-products/find-all-products.service';
 import { DeleteProductService } from '@/modules/products/services/delete-product/delete-product.service';
 import { FindProductByIdService } from '@/modules/products/services/find-product-by-id/find-product-by-id.service';
+import { ProductType } from '../types/product.type';
 
 @Controller('products')
 export class ProductsController {
@@ -56,18 +57,19 @@ export class ProductsController {
 
   @Get(':_id')
   @HttpCode(HttpStatus.OK)
-  async findById(@Param('_id') _id: string): Promise<any> {
+  async findById(@Param('_id') _id: string): Promise<ProductType> {
     const { name } = await this.findProductByIdService.execute(_id);
+    const products = '/products';
     return {
       name,
       links: [
         {
           rel: 'self',
-          href: `http://localhost:3005/products/${_id}`,
+          href: products + `/${_id}`,
         },
         {
           rel: 'delete',
-          href: `http://localhost:3005/products/${_id}`,
+          href: products + `/${_id}`,
         },
       ],
     };
