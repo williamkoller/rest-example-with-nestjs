@@ -1,11 +1,18 @@
 import envFolderPath, { envs } from '@/config/env';
-
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 
 export const imports = [
   ConfigModule.forRoot({
     isGlobal: true,
     envFilePath: envFolderPath.folderPath,
     load: [envs],
+  }),
+  MongooseModule.forRootAsync({
+    imports: [ConfigModule],
+    inject: [ConfigService],
+    useFactory: async (config: ConfigService) => ({
+      uri: config.get<string>('mongoUri'),
+    }),
   }),
 ];
