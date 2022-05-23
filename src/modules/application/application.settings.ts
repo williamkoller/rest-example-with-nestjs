@@ -3,6 +3,7 @@ import { forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { HealthModule } from '@/modules/health/health.module';
+import { ProductsModule } from '@/modules/products/products.module';
 
 export const imports = [
   ConfigModule.forRoot({
@@ -18,4 +19,5 @@ export const imports = [
     }),
   }),
   forwardRef(() => HealthModule),
+  forwardRef(() => ProductsModule),
 ];
