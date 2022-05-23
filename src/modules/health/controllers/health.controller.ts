@@ -17,7 +17,7 @@ export class HealthController {
   @HealthCheck()
   async check(): Promise<HealthCheckResult> {
     return this.healthCheck.check([
-      () => this.mongooseHealth.pingCheck('mongoDB'),
+      () => this.mongooseHealth.pingCheck('rest-mongodb'),
     ]);
   }
 }
