@@ -2,7 +2,7 @@ import envFolderPath, { envs } from '@/config/env';
 import { forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { HealthModule } from '../health/health.module';
+import { HealthModule } from '@/modules/health/health.module';
 
 export const imports = [
   ConfigModule.forRoot({
